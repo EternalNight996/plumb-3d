@@ -96,6 +96,17 @@ node tools/build-packed.mjs   # → dist/index.html（gzip 自解压，244.8 KB�
 
 </details>
 
+## 🌐 语言
+
+游戏内 HUD、标题卡、暂停/结算界面、提示气泡**全部中英双语**：
+
+- 自动按浏览器语言选择（`zh-*` → 中文，其余 → English），选择会记在 `localStorage`
+- 游戏内按 **`L`** 随时切换；也可以用 `?lang=zh` / `?lang=en` 强制
+
+| 中文 | English |
+|---|---|
+| ![中文](assets/screenshot-zh.png) | ![English](assets/screenshot-en.png) |
+
 ## ⌨️ 操作
 
 | 动作 | PC | 手机 |
@@ -107,6 +118,7 @@ node tools/build-packed.mjs   # → dist/index.html（gzip 自解压，244.8 KB�
 | 震波 | `C` / 右键 | 「震」 |
 | 视角 | 鼠标（指针锁；被拒时右键拖拽） | 右半屏拖动 |
 | 暂停 | `Esc` | — |
+| 切换语言 | `L` | — |
 | 其它 | `V` 视角 · `N` 时间 · `B` 辉光 · `G` 环境遮蔽 · `T` 传送据点 · `R` 回检查点 · `[` `]` 灵敏度 · `I` 反转 Y · `M` 音乐 | 「视角」 |
 
 ---

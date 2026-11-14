@@ -13,9 +13,15 @@
 2. Phone: serve the folder and open `dist/index.html` in landscape (big web button + ring of skills).
 3. From source: `npm i -D esbuild three` then `node tools/build.mjs` / `node tools/build-packed.mjs`.
 
+## 🌐 Language
+
+The HUD, title card, pause / game-over / clear screens and every toast are bilingual. It follows the browser locale (`zh-*` → Chinese, otherwise English), remembers the choice in `localStorage`, and **`L`** toggles it in game. Force it with `?lang=zh` or `?lang=en`.
+
+![English UI](assets/screenshot-en.png)
+
 ## ⌨️ Controls
 
-`WASD` move · `Shift` sprint · `Space` triple jump · **LMB / Q** web · `E` fireball · `C` shockwave · `Esc` pause · `V` view · `N` time of day.
+`WASD` move · `Shift` sprint · `Space` triple jump · **LMB / Q** web · `E` fireball · `C` shockwave · `Esc` pause · `V` view · `N` time of day · `L` language.
 
 ## 🧩 Highlights
 

@@ -151,18 +151,18 @@
 
 <div id="hud">
   <div class="row">
-    <div><div class="k">Coins</div><b id="coins">0</b></div>
-    <div><div class="k">Lives</div><b id="hearts">♥♥♥</b></div>
-    <div><div class="k">Score</div><b id="score">0</b></div>
-    <div><div class="k">Time</div><b id="time">0.0</b></div>
+    <div><div class="k" data-i18n="coins">Coins</div><b id="coins">0</b></div>
+    <div><div class="k" data-i18n="lives">Lives</div><b id="hearts">♥♥♥</b></div>
+    <div><div class="k" data-i18n="score">Score</div><b id="score">0</b></div>
+    <div><div class="k" data-i18n="time">Time</div><b id="time">0.0</b></div>
     <div><div class="k">FPS</div><b id="fps">0</b></div>
-    <div><div class="k">Progress</div><b id="progress">0%</b></div>
-    <div><div class="k">Input</div><b id="inputLabel">键鼠</b></div>
-    <div><div class="k">Time</div><b id="timeOfDay">白天</b></div>
-    <div><div class="k">View</div><b id="modeLabel">第一人称</b></div>
-    <div><div class="k">Quality</div><b id="quality">mid</b></div>
+    <div><div class="k" data-i18n="progress">Progress</div><b id="progress">0%</b></div>
+    <div><div class="k" data-i18n="input">Input</div><b id="inputLabel" data-i18n="kbmode">键鼠</b></div>
+    <div><div class="k" data-i18n="tod">Time</div><b id="timeOfDay" data-i18n="day">白天</b></div>
+    <div><div class="k" data-i18n="view">View</div><b id="modeLabel" data-i18n="fp">第一人称</b></div>
+    <div><div class="k" data-i18n="quality">Quality</div><b id="quality">mid</b></div>
   </div>
-  <div id="buff">吃蘑菇变身</div>
+  <div id="buff" data-i18n="buffed">吃蘑菇变身</div>
   <div id="webStatus">蛛丝：就绪</div>
   <div id="fireStatus">火球 就绪（E）</div>
   <div id="districtStatus">据点 0/0</div>
@@ -172,20 +172,20 @@
   <div id="stick"><div id="stickNub"></div></div>
   <div id="lookPad"></div>
   <div id="btns">
-    <button id="btnWeb" class="tbtn big" type="button">丝</button>
-    <button id="btnJump" class="tbtn" type="button">跳</button>
-    <button id="btnFire" class="tbtn" type="button">火</button>
-    <button id="btnSkill" class="tbtn" type="button">震</button>
-    <button id="btnView" class="tbtn small" type="button">视角</button>
+    <button id="btnWeb" class="tbtn big" type="button" data-i18n="tWeb">丝</button>
+    <button id="btnJump" class="tbtn" type="button" data-i18n="tJump">跳</button>
+    <button id="btnFire" class="tbtn" type="button" data-i18n="tFire">火</button>
+    <button id="btnSkill" class="tbtn" type="button" data-i18n="tSkill">震</button>
+    <button id="btnView" class="tbtn small" type="button" data-i18n="tView">视角</button>
   </div>
 </div>
-<button id="inputMode" type="button" title="切换键鼠 / 触控">切换</button>
+<button id="inputMode" type="button" data-i18n-title="switchTitle" title="切换键鼠 / 触控"><span data-i18n="switch">切换</span></button>
 <div id="loading"><div id="loadingBox">
   <div style="font:600 15px/1.4 ui-monospace,monospace;letter-spacing:.22em">PLUMB 3D</div>
   <div id="loadBar"><div id="loadFill"></div></div>
-  <div id="loadText">正在生成城市 · 0%</div>
+  <div id="loadText" data-i18n="loading">正在生成城市 · 0%</div>
 </div></div>
-<div id="rotateBanner">建议横屏游玩 · Rotate for a wider view</div>
+<div id="rotateBanner" data-i18n="rotate">建议横屏游玩 · Rotate for a wider view</div>
 <div id="rotateHint"><div style="width:78vw;max-width:340px;white-space:normal;word-break:break-word;font-size:13px;line-height:1.8;margin:0 auto">请横屏游玩<br>Please rotate your device</div></div>
 <div id="toast"></div>
 <div id="bench">…</div>
@@ -193,25 +193,25 @@
 <div id="lock">
   <div class="card">
     <h1>PLUMB <span>3D</span></h1>
-    <p>4200 米复杂关卡 · 第一人称 · 蜘蛛丝飞荡 · 三级跳 · 蘑菇变身 · 震波 · 守卫</p>
-    <div class="keys">
+    <p data-i18n="subtitle">4200 米复杂关卡 · 第一人称 · 蜘蛛丝飞荡 · 三级跳 · 蘑菇变身 · 震波 · 守卫</p>
+    <div class="keys" data-i18n-html="keys">
       <b>WASD</b> 移动 · <b>Shift</b> 冲刺 · <b>Space</b> 跳（长按更高）· <b>空中再按 Space</b> 二段跳<br>
       <b>左键 / Q</b> 蛛丝：命中即飞，收线中再点换目标（旧丝同帧消失） · <b>E</b> 火球 · <b>C / 右键</b> 震波（需变身）<br>
       <b>鼠标</b> 转视角 · <b>滚轮</b> 镜头远近（仅第三人称）<br>
       <b>N</b> 白天/黄昏/夜晚 · <b>Esc</b> 暂停 · <b>V</b> 第一/第三人称 · <b>1/2/3</b> 画质 · <b>[ ]</b> 灵敏度 · <b>I</b> 反转 Y · <b>F</b> 手感面板 · <b>M</b> 音乐 · <b>R</b> 回检查点
     </div>
-    <button id="deploy">开始游戏</button>
+    <button id="deploy" data-i18n="start">开始游戏</button>
   </div>
 </div>
 
 <div id="pause">
   <div class="card">
     <h1>PA<span>USED</span></h1>
-    <p class="hint">Esc 或点下面继续</p>
+    <p class="hint" data-i18n="pauseHint">Esc 或点下面继续</p>
     <div class="btnrow">
-      <button id="btnResume">继续</button>
-      <button id="btnRestart">重新开始</button>
-      <button id="btnQuit">回到标题</button>
+      <button id="btnResume" data-i18n="resume">继续</button>
+      <button id="btnRestart" data-i18n="restart">重新开始</button>
+      <button id="btnQuit" data-i18n="quit">回到标题</button>
     </div>
   </div>
 </div>
@@ -221,8 +221,8 @@
     <h1>GAME <span>OVER</span></h1>
     <p id="overLine" class="hint">—</p>
     <div class="btnrow">
-      <button id="btnOverAgain">再来一次</button>
-      <button id="btnOverQuit">回到标题</button>
+      <button id="btnOverAgain" data-i18n="again">再来一次</button>
+      <button id="btnOverQuit" data-i18n="quit">回到标题</button>
     </div>
   </div>
 </div>
@@ -233,9 +233,9 @@
     <p id="winLine"></p>
     <p id="winStats" class="hint"></p>
     <p id="winBest" class="hint"></p>
-    <div class="keys">按 <b>V</b> 换视角 · <b>R</b> 回检查点</div>
+    <div class="keys" data-i18n-html="winKeys">按 <b>V</b> 换视角 · <b>R</b> 回检查点</div>
     <div class="btnrow">
-      <button id="again">再来一次</button>
+      <button id="again" data-i18n="again">再来一次</button>
     </div>
   </div>
 </div>

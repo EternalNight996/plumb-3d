@@ -7,6 +7,89 @@
     document.title = 'ERR: ' + (ev.message || '') + ' @' + (ev.lineno || 0) + ':' + (ev.colno || 0);
   });
   var T = window.THREE;
+
+  var I18N_EXTRA = true;
+  var I18N = {
+    zh: {
+      coins: '金币', lives: '生命', score: '分数', time: '用时', progress: '进度', input: '输入',
+      tod: '时段', view: '视角', quality: '画质', kbmode: '键鼠', touchmode: '触控',
+      day: '白天', dusk: '黄昏', night: '夜晚', fp: '第一人称', tp: '第三人称',
+      buffed: '吃蘑菇变身', tWeb: '丝', tJump: '跳', tFire: '火', tSkill: '震', tView: '视角',
+      switch: '切换', switchTitle: '切换键鼠 / 触控',
+      loading: '正在生成城市 · {p}%', loadingDone: '生成完成 · 100%',
+      rotate: '建议横屏游玩',
+      subtitle: '4200 米复杂关卡 · 第一人称 · 蜘蛛丝飞荡 · 三级跳 · 蘑菇变身 · 震波 · 守卫',
+      keys: '<b>WASD</b> 移动 · <b>Shift</b> 冲刺 · <b>Space</b> 跳（长按更高）· <b>空中再按两次 Space</b> 三级跳<br><b>左键 / Q</b> 蛛丝：命中即飞，收线中再点换目标 · <b>E</b> 火球 · <b>C / 右键</b> 震波（需变身）<br><b>鼠标</b> 转视角 · <b>滚轮</b> 镜头远近（仅第三人称）<br><b>N</b> 白天/黄昏/夜晚 · <b>Esc</b> 暂停 · <b>V</b> 视角 · <b>1/2/3</b> 画质 · <b>[ ]</b> 灵敏度 · <b>I</b> 反转 Y · <b>F</b> 手感面板 · <b>M</b> 音乐 · <b>R</b> 回检查点 · <b>L</b> 中/英',
+      winKeys: '按 <b>V</b> 换视角 · <b>R</b> 回检查点',
+      start: '开始游戏', resume: '继续', restart: '重新开始', quit: '回到标题', again: '再来一次', pauseHint: 'Esc 或点下面继续',
+      webReady: '蛛丝：就绪', webFlying: '蛛丝：射出中', webAttached: '蛛丝：{s}s · 左键可再发', webReeling: '蛛丝：收线中 · 左键可再发',
+      fireReady: '火球 就绪（E）', fireCd: '火球 {s}s', district: '据点 {a}/{b}', districtTeleport: ' · T 传送',
+      pauseTitle: '已暂停', overTitle: '游戏结束', winTitle: '通关！',
+      toastSwitch: '已切换到键鼠/触控', toastTime: '时间：{v}', toastQuality: '画质 {v}',
+      toastBest: '最佳纪录：{t} 秒',
+      statsLine: '用时 {t} 秒 · 金币 {c} · 得分 {s} · 据点 {a}/{b}',
+      winLine: '通关！用时 {t} 秒', winStats: '金币 {c} / {d} · 击倒 {p} · 得分 {s}',
+      bestLine: '最佳纪录：{t} 秒 · 最高分 {s}', bestNew: '（本次刷新！）',
+      tutorial1: '左键 / Q 吐蛛丝：命中即飞，收线中再点换目标',
+      tutorial2: '空中再按两次 Space = 三级跳',
+      tutorial3: 'E 火球 · C 震波（需蘑菇变身）',
+      tutorial4: '清空据点后按 T 传送，Esc 暂停'
+    },
+    en: {
+      coins: 'Coins', lives: 'Lives', score: 'Score', time: 'Time', progress: 'Progress', input: 'Input',
+      tod: 'Time', view: 'View', quality: 'Quality', kbmode: 'Keyboard', touchmode: 'Touch',
+      day: 'Day', dusk: 'Dusk', night: 'Night', fp: '1st person', tp: '3rd person',
+      buffed: 'Mushroom power', tWeb: 'WEB', tJump: 'JUMP', tFire: 'FIRE', tSkill: 'PULSE', tView: 'VIEW',
+      switch: 'Switch', switchTitle: 'Switch keyboard / touch',
+      loading: 'Building the city · {p}%', loadingDone: 'Ready · 100%',
+      rotate: 'Rotate your device for a wider view',
+      subtitle: 'A 4200 m skyline course · first person · web swinging · triple jump · mushroom power · shockwave · guardians',
+      keys: '<b>WASD</b> move · <b>Shift</b> sprint · <b>Space</b> jump (hold for height) · <b>two more Space</b> in air = triple jump<br><b>LMB / Q</b> web: sticks and pulls you instantly, click again to retarget · <b>E</b> fireball · <b>C / RMB</b> shockwave (needs mushroom)<br><b>Mouse</b> look · <b>Wheel</b> camera distance (3rd person)<br><b>N</b> day/dusk/night · <b>Esc</b> pause · <b>V</b> view · <b>1/2/3</b> quality · <b>[ ]</b> sensitivity · <b>I</b> invert Y · <b>F</b> feel panel · <b>M</b> music · <b>R</b> checkpoint · <b>L</b> 中文/EN',
+      winKeys: '<b>V</b> view · <b>R</b> checkpoint',
+      start: 'START', resume: 'Resume', restart: 'Restart', quit: 'Main menu', again: 'Play again', pauseHint: 'Esc or click below to resume',
+      webReady: 'Web: ready', webFlying: 'Web: flying', webAttached: 'Web: {s}s · click to re-fire', webReeling: 'Web: reeling · click to re-fire',
+      fireReady: 'Fireball ready (E)', fireCd: 'Fireball {s}s', district: 'Outposts {a}/{b}', districtTeleport: ' · T teleport',
+      pauseTitle: 'PAUSED', overTitle: 'GAME OVER', winTitle: 'LEVEL CLEAR',
+      toastSwitch: 'Input mode switched', toastTime: 'Time: {v}', toastQuality: 'Quality {v}',
+      toastBest: 'Best: {t}s',
+      statsLine: 'Time {t}s · Coins {c} · Score {s} · Outposts {a}/{b}',
+      winLine: 'Cleared in {t}s', winStats: 'Coins {c} / {d} · Kills {p} · Score {s}',
+      bestLine: 'Best: {t}s · Top score {s}', bestNew: ' (new record!)',
+      tutorial1: 'LMB / Q fires the web: stick and fly, click again to retarget',
+      tutorial2: 'Two more Space presses in the air = triple jump',
+      tutorial3: 'E fireball · C shockwave (needs mushroom)',
+      tutorial4: 'Clear an outpost then press T to teleport · Esc pauses'
+    }
+  };
+  var lang = 'zh';
+  function detectLang() {
+    var q = /[?&]lang=(zh|en)/.exec(location.search);
+    if (q) return q[1];
+    try { var saved = localStorage.getItem('plumb3d.lang'); if (saved === 'zh' || saved === 'en') return saved; } catch (e) {}
+    return /^zh/i.test(navigator.language || '') ? 'zh' : 'en';
+  }
+  function L(key, vars) {
+    var dict = I18N[lang] || I18N.zh;
+    var out = dict[key] !== undefined ? dict[key] : (I18N.zh[key] !== undefined ? I18N.zh[key] : key);
+    if (vars) out = String(out).replace(/\{(\w+)\}/g, function (m, k2) { return vars[k2] !== undefined ? vars[k2] : m; });
+    return out;
+  }
+  function applyLang(next) {
+    lang = next || lang;
+    try { localStorage.setItem('plumb3d.lang', lang); } catch (e) {}
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    var nodes = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < nodes.length; i++) nodes[i].textContent = L(nodes[i].getAttribute('data-i18n'));
+    var htmlNodes = document.querySelectorAll('[data-i18n-html]');
+    for (var j = 0; j < htmlNodes.length; j++) htmlNodes[j].innerHTML = L(htmlNodes[j].getAttribute('data-i18n-html'));
+    var titleNodes = document.querySelectorAll('[data-i18n-title]');
+    for (var k = 0; k < titleNodes.length; k++) titleNodes[k].setAttribute('title', L(titleNodes[k].getAttribute('data-i18n-title')));
+    var pz = document.getElementById('pause'); if (pz) pz.querySelector('h1').innerHTML = lang === 'zh' ? 'PA<span>USED</span>' : 'PA<span>USED</span>';
+    var to = document.getElementById('over'); if (to) to.querySelector('h1').innerHTML = lang === 'zh' ? 'GAME <span>OVER</span>' : 'GAME <span>OVER</span>';
+    var tw = document.getElementById('win'); if (tw) tw.querySelector('h1').innerHTML = lang === 'zh' ? 'LEVEL <span>CLEAR</span>' : 'LEVEL <span>CLEAR</span>';
+    if (window.__applyLangExtras) window.__applyLangExtras();
+  }
+  lang = detectLang();
   window.__frames = 0;
   window.__errors = window.__errors || [];
 
@@ -1009,12 +1092,12 @@
       if (pct !== lastPct) {
         lastPct = pct;
         if (fill) fill.style.width = pct + '%';
-        if (txt) txt.textContent = '正在生成城市 · ' + pct + '%';
+        if (txt) txt.textContent = L('loading', { p: pct });
       }
       if (levelBuild.z > -(LEVEL_LEN - 18)) { requestAnimationFrame(step); return; }
       buildLevelFinish();
       if (fill) fill.style.width = '100%';
-      if (txt) txt.textContent = '生成完成 · 100%';
+      if (txt) txt.textContent = L('loadingDone');
       if (overlay) { overlay.classList.add('done'); setTimeout(function () { overlay.style.display = 'none'; }, 380); }
       done();
     }
@@ -1509,9 +1592,9 @@
     var wLine = document.getElementById('winLine');
     if (wLine) wLine.textContent = '通关！用时 ' + stats.time.toFixed(1) + ' 秒';
     var wStats = document.getElementById('winStats');
-    if (wStats) wStats.textContent = '金币 ' + stats.coins + ' / ' + stats.total + ' · 击倒 ' + stats.popped + ' · 得分 ' + stats.score;
+    if (wStats) wStats.textContent = L('winStats', { c: stats.coins, d: stats.total, p: stats.popped, s: stats.score });
     var wBest = document.getElementById('winBest');
-    if (wBest) wBest.textContent = '最佳纪录：' + best.time.toFixed(1) + ' 秒 · 最高分 ' + best.score + (stats.time <= best.time + 0.01 ? '（本次刷新！）' : '');
+    if (wBest) wBest.textContent = L('bestLine', { t: best.time.toFixed(1), s: best.score }) + (stats.time <= best.time + 0.01 ? L('bestNew') : '');
     var w = document.getElementById('win');
     if (w) w.style.display = 'grid';
   }
@@ -1534,7 +1617,7 @@
     state = 'over';
     setImmersive(false);
     var line = document.getElementById('overLine');
-    if (line) line.textContent = '用时 ' + stats.time.toFixed(1) + ' 秒 · 金币 ' + stats.coins + ' · 得分 ' + stats.score + ' · 据点 ' + districts.filter(function (d) { return d.cleared; }).length + '/' + districts.length;
+    if (line) line.textContent = L('statsLine', { t: stats.time.toFixed(1), c: stats.coins, s: stats.score, a: districts.filter(function (d) { return d.cleared; }).length, b: districts.length });
     var el = document.getElementById('over');
     if (el) el.classList.add('on');
   }
@@ -2523,10 +2606,10 @@
   }
 
   function webStatusText() {
-    if (web.phase === 'idle') return '蛛丝：就绪';
-    if (web.phase === 'flying') return '蛛丝：射出中';
-    if (web.phase === 'attached') return '蛛丝：' + web.timer.toFixed(1) + 's · 左键可再发';
-    return '蛛丝：收线中 · 左键可再发';
+    if (web.phase === 'idle') return L('webReady');
+    if (web.phase === 'flying') return L('webFlying');
+    if (web.phase === 'attached') return L('webAttached', { s: web.timer.toFixed(1) });
+    return L('webReeling');
   }
   function buildGrappleVisuals() {
     var ropeMat = new T.MeshBasicMaterial({ color: 0xbfe9ff, transparent: true, opacity: 0.85 });
@@ -2874,16 +2957,16 @@
     if (dEl) {
       var clearedCount = 0;
       for (var di = 0; di < districts.length; di++) if (districts[di].cleared) clearedCount++;
-      dEl.textContent = '据点 ' + clearedCount + '/' + districts.length + (clearedCount ? ' · T 传送' : '');
+      dEl.textContent = L('district', { a: clearedCount, b: districts.length }) + (clearedCount ? L('districtTeleport') : '');
     }
     var fbEl = document.getElementById('fireStatus');
-    if (fbEl) fbEl.textContent = fireCd > 0 ? ('火球 ' + fireCd.toFixed(1) + 's') : '火球 就绪（E）';
+    if (fbEl) fbEl.textContent = fireCd > 0 ? L('fireCd', { s: fireCd.toFixed(1) }) : L('fireReady');
     var bf = document.getElementById('buff');
     if (bf) {
       if (player.buff > 0) { bf.textContent = '变身 ' + player.buff.toFixed(1) + 's · Q 震波'; bf.style.color = '#ffd24a'; }
-      else { bf.textContent = '吃蘑菇变身'; bf.style.color = '#a9b3bd'; }
+      else { bf.textContent = L('buffed'); bf.style.color = '#a9b3bd'; }
     }
-    var md = document.getElementById('modeLabel'); if (md) md.textContent = mode === 'fp' ? '第一人称' : '第三人称';
+    var md = document.getElementById('modeLabel'); if (md) md.textContent = mode === 'fp' ? L('fp') : L('tp');
     var pg = document.getElementById('progress');
     if (pg && goal) {
       var done = Math.max(0, Math.min(1, (8 - player.pos.z) / (8 - goal.pos.z)));
@@ -3285,7 +3368,7 @@
           toast('已切换到触控模式');
         }
         var lab = document.getElementById('inputLabel');
-        if (lab) lab.textContent = isTouch ? '触控' : '键鼠';
+        if (lab) lab.textContent = isTouch ? L('touchmode') : L('kbmode');
       });
     }
     document.getElementById('deploy').addEventListener('click', function () {
@@ -3401,7 +3484,7 @@
     }
     document.getElementById('quality').textContent = quality;
     var inLab = document.getElementById('inputLabel');
-    if (inLab) inLab.textContent = isTouch ? '触控' : '键鼠';
+    if (inLab) inLab.textContent = isTouch ? L('touchmode') : L('kbmode');
     composer = null; bloomPass = null; ssaoPass = null; outputPass = null;
     if (quality !== 'low' && !isTouch) buildBloom();
     if (sun) applyTimeOfDay(timeOfDay);
@@ -3487,6 +3570,7 @@
     model.visible = false;
     fpRig = buildFpRig();
     if (/[?&]nohands=1/.test(location.search)) fpRig.visible = false;
+    applyLang(lang);
     bindInput();
     bindTouch();
     updateHud();
@@ -3950,9 +4034,9 @@
     setInterval(function () {
       var best = saveBest();
     var wStats = document.getElementById('winStats');
-    if (wStats) wStats.textContent = '用时 ' + stats.time.toFixed(1) + ' 秒 · 金币 ' + stats.coins + ' / ' + stats.total + ' · 击倒 ' + stats.popped + ' · 得分 ' + stats.score;
+    if (wStats) wStats.textContent = L('winStats', { c: stats.coins, d: stats.total, p: stats.popped, s: stats.score });
     var wBest = document.getElementById('winBest');
-    if (wBest) wBest.textContent = '最佳纪录：' + best.time.toFixed(1) + ' 秒 · 最高分 ' + best.score + (stats.time <= best.time + 0.01 ? '（本次刷新！）' : '');
+    if (wBest) wBest.textContent = L('bestLine', { t: best.time.toFixed(1), s: best.score }) + (stats.time <= best.time + 0.01 ? L('bestNew') : '');
     var w = document.getElementById('win');
       if (w && w.style.display !== 'none') w.style.display = 'none';
       var b = document.getElementById('bench');
