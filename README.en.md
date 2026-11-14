@@ -30,4 +30,4 @@
 
 ## 📄 License
 
-MIT. Every mesh, texture and sound is generated in code at runtime.
+MIT © mengbot. Every mesh, texture and sound is generated in code at runtime.

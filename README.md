@@ -13,6 +13,8 @@
 
 <p align="center"><strong>⭐ 觉得能玩就点个 Star</strong>，也欢迎直接提 Issue 说手感哪里不对</p>
 
+<p align="center"><sub>作者 <b>mengbot</b> · MIT</sub></p>
+
 <p align="center">
   <img src="assets/screenshot-desktop.png" width="880" alt="PLUMB 3D 桌面端游玩画面：浮空城市、蛛丝跳点与敌人" />
 </p>
