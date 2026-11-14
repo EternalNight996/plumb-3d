@@ -1,10 +1,12 @@
-import { readFileSync, writeFileSync, statSync } from 'node:fs';
+#!/usr/bin/env node
+/* builds dist/index.html — gzip + base64 self-extracting single file */
+import { mkdirSync, writeFileSync, readFileSync, statSync } from 'node:fs';
 import { gzipSync, brotliCompressSync } from 'node:zlib';
+import { join } from 'node:path';
+import { ROOT, engine, game, shell, kb } from './lib.mjs';
 
-const B = 'F:/MyApp/eternal/plumb3d/';
-const shell = readFileSync(B + '_build/shell.html', 'utf8');
-const engine = readFileSync(B + '_build/three.trim.js', 'utf8');
-const game = readFileSync(B + '_build/game.min.js', 'utf8');
+const joined = engine() + '\n;' + game();
+const payload = gzipSync(Buffer.from(joined, 'utf8'), { level: 9 }).toString('base64');
 
 const boot = `
 <script>
@@ -12,53 +14,35 @@ const boot = `
   function bad(msg) {
     var d = document.createElement('div');
     d.style.cssText = 'position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:#070b10;color:#dfe9f2;font:14px/1.7 ui-monospace,monospace;padding:24px;text-align:center';
-    d.innerHTML = '当前浏览器不支持运行时解压（' + msg + '）<br>请打开 <b>index-plain.html</b>，那是未压缩版本。';
+    d.innerHTML = 'This browser cannot inflate the payload (' + msg + ')<br>Open <b>index-plain.html</b> instead.';
     document.body.appendChild(d);
   }
-  if (!('DecompressionStream' in window)) { bad('DecompressionStream 缺失'); return; }
-  function b64ToBytes(b64) {
+  if (!('DecompressionStream' in window)) { bad('no DecompressionStream'); return; }
+  function bytes(b64) {
     var bin = atob(b64), n = bin.length, u = new Uint8Array(n);
     for (var i = 0; i < n; i++) u[i] = bin.charCodeAt(i);
     return u;
   }
-  async function inflate(id) {
-    var el = document.getElementById(id);
-    var bytes = b64ToBytes(el.textContent.replace(/\\s+/g, ''));
-    var ds = new DecompressionStream('gzip');
-    var stream = new Blob([bytes]).stream().pipeThrough(ds);
-    return await new Response(stream).text();
-  }
   (async function () {
     try {
-        var code = await inflate('p0');
+      var el = document.getElementById('p0');
+      var src = new Blob([bytes(el.textContent.replace(/\\s+/g, ''))]).stream().pipeThrough(new DecompressionStream('gzip'));
+      var code = await new Response(src).text();
       var s = document.createElement('script');
       s.textContent = code;
       document.body.appendChild(s);
-    } catch (e) {
-      document.title = 'BOOT-ERR ' + (e && e.message);
-      bad(e && e.message);
-    }
+    } catch (e) { document.title = 'BOOT-ERR ' + (e && e.message); bad(e && e.message); }
   })();
 })();
 </script>`;
 
-const joined = engine + '\n;' + game;
-const gz = gzipSync(Buffer.from(joined, 'utf8'), { level: 9 });
-const payload = gz.toString('base64');
-
-const packed = shell
+const html = shell()
   .replace('__ENGINE__', '')
   .replace('__GAME__', '')
   .replace('</body>', '<script type="text/plain" id="p0">' + payload + '</script>\n' + boot + '\n</body>');
 
-writeFileSync(B + 'index.html', packed);
-
-const plain = shell.replace('__ENGINE__', () => engine).replace('__GAME__', () => game);
-writeFileSync(B + 'index-plain.html', plain);
-
-const kb = (n) => (n / 1024).toFixed(1) + ' KB';
-console.log('packed  index.html      ' + kb(statSync(B + 'index.html').size));
-console.log('        brotli          ' + kb(brotliCompressSync(readFileSync(B + 'index.html')).length));
-console.log('plain   index-plain.html ' + kb(statSync(B + 'index-plain.html').size));
-console.log('        brotli          ' + kb(brotliCompressSync(readFileSync(B + 'index-plain.html')).length));
-console.log('scripts ' + kb(joined.length) + ' → gzip ' + kb(gz.length) + ' → base64 ' + kb(payload.length));
+const out = join(ROOT, 'dist/index.html');
+mkdirSync(join(ROOT, 'dist'), { recursive: true });
+writeFileSync(out, html);
+console.log('dist/index.html       ' + kb(statSync(out).size) + '  brotli ' + kb(brotliCompressSync(readFileSync(out)).length));
+console.log('scripts ' + kb(joined.length) + ' → gzip ' + kb(gzipSync(Buffer.from(joined, 'utf8'), { level: 9 }).length) + ' → base64 ' + kb(payload.length));

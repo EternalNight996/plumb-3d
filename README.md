@@ -71,6 +71,19 @@ node tools/build-packed.mjs   # → dist/index.html（gzip 自解压，244.8 KB�
   <img src="assets/screenshot-controls.png" width="880" alt="手机端：大蛛丝键 + 环形技能键 + 大摇杆" />
 </p>
 
+## 📸 截图
+
+| 手机端 | 桌面端 |
+|---|---|
+| ![手机](assets/screenshot-mobile.png) | ![桌面](assets/screenshot-desktop.png) |
+
+<details>
+<summary>自检输出（25 条确定性探针）</summary>
+
+![自检](assets/screenshot-selftest.png)
+
+</details>
+
 ## ⌨️ 操作
 
 | 动作 | PC | 手机 |

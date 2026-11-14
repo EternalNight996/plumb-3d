@@ -1,8 +1,14 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-const base = 'F:/MyApp/eternal/plumb3d/';
-const shell = readFileSync(base + '_build/shell.html', 'utf8');
-const engine = readFileSync(base + '_build/three.trim.js', 'utf8');
-const game = readFileSync(base + '_build/game.js', 'utf8');
-const out = shell.replace('__ENGINE__', () => engine).replace('__GAME__', () => game);
-writeFileSync(base + 'index.html', out);
-console.log('index.html', (Buffer.byteLength(out) / 1024).toFixed(1) + ' KB');
+#!/usr/bin/env node
+/* builds dist/index-plain.html — uncompressed, readable, works everywhere */
+import { mkdirSync, writeFileSync, readFileSync, statSync } from 'node:fs';
+import { brotliCompressSync } from 'node:zlib';
+import { join } from 'node:path';
+import { ROOT, engine, game, shell, kb } from './lib.mjs';
+
+const eng = engine();
+const gam = game();
+const html = shell().replace('__ENGINE__', () => eng).replace('__GAME__', () => gam);
+const out = join(ROOT, 'dist/index-plain.html');
+mkdirSync(join(ROOT, 'dist'), { recursive: true });
+writeFileSync(out, html);
+console.log('dist/index-plain.html ' + kb(statSync(out).size) + '  brotli ' + kb(brotliCompressSync(readFileSync(out)).length));
