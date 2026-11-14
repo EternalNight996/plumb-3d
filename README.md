@@ -16,6 +16,12 @@
 <p align="center"><sub>作者 <b>mengbot</b> · MIT</sub></p>
 
 <p align="center">
+  <a href="https://eternalnight996.github.io/plumb-3d/"><b>▶ 在线试玩（GitHub Pages）</b></a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/EternalNight996/plumb-3d">GitHub</a>
+</p>
+
+<p align="center">
   <img src="assets/screenshot-desktop.png" width="880" alt="PLUMB 3D 桌面端游玩画面：浮空城市、蛛丝跳点与敌人" />
 </p>
 
