@@ -85,6 +85,10 @@ node tools/build-packed.mjs   # → dist/index.html（gzip 自解压，244.8 KB�
 |---|---|
 | ![手机](assets/screenshot-mobile.png) | ![桌面](assets/screenshot-desktop.png) |
 
+在线版实拍（GitHub Pages，46 FPS）：
+
+![在线试玩](assets/screenshot-online.png)
+
 <details>
 <summary>自检输出（25 条确定性探针）</summary>
 
