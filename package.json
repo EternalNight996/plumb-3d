@@ -1,6 +1,6 @@
 {
   "name": "plumb-3d",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "author": "mengbot",
   "description": "A 4.2 km skyline parkour game in a single index.html — zero assets, three.js inlined.",
@@ -14,7 +14,10 @@
     "grappling-hook"
   ],
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://gitee.com/mengbot/plumb-3d.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/mengbot/plumb-3d.git"
+  },
   "scripts": {
     "build": "node tools/build.mjs",
     "build:packed": "node tools/build-packed.mjs",

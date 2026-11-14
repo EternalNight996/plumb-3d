@@ -4,7 +4,7 @@
 > 零外部资源、零构建依赖、双击即玩的单文件 3D 游戏；手机横屏同款操作。
 
 <p align="center">
-  <img src="https://img.shields.io/badge/single--file-244.8%20KB-ffd24a" alt="single file" />
+  <img src="https://img.shields.io/badge/single--file-264.0%20KB-ffd24a" alt="single file" />
   <img src="https://img.shields.io/badge/three.js-r171-3B82F6" alt="three.js" />
   <img src="https://img.shields.io/badge/runs%20from-file%3A%2F%2F-yes-2ea043" alt="file protocol" />
   <img src="https://img.shields.io/badge/mobile-HTML5%20%2B%20touch-8957e5" alt="mobile" />

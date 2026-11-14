@@ -101,3 +101,52 @@ FPS        PC mid 52 / 手机 low 52（headless 软件渲染）
 ```
 
 构建脚本：`_build/build-packed.mjs`（压缩版）、`_build/build.mjs`（未压缩版）、`_build/entry-trim.js`（tree-shaking 入口）。
+
+## v56：Tab 切换 + 火球投掷动画 + H5 竖屏适配
+
+### 键盘
+
+| 键 | 行为 | 探针 |
+|---|---|---|
+| **Tab** | 隐藏/显示全部信息（HUD + 蛛丝/火球/据点状态行），浏览器默认行为被取消 | `tab_hid_hud:true` / `tab_restores_hud:true` / `tab_default_prevented:true` |
+| **L** | 中/英切换（之前只在 i18n 里实现，按键漏了，这次补上） | `lang_switched:"en"` |
+
+### 火球投掷动作（0.14 秒）
+
+- 手臂前甩 -0.42 + 抬 0.30 rad，14 倍速收尾
+- 震屏 `0.18 + 蓄力×0.26`，手部灯冲到 `40 + 蓄力×60`
+- 音效 `150 + 蓄力×90` Hz / 0.14 s
+- 探针：`throw_kick_started:true`、`throw_kick_frames:9`（0.15 s 归零）
+
+### H5 竖屏
+
+- HUD：字号 7–12px、可换行、竖屏隐藏 分数/用时/画质 三项，避免顶栏溢出
+- 旋转提示条下移到 HUD 下方（52px）
+- 控制环：竖屏时大键 64–84px、小键 ×0.6，环半径另留 6px，并把布局宽度**钳到 420px**——有些 WebView 报告的布局视口比屏幕宽，不钳就会出现按钮被裁
+- 摇杆 104–172px 自适应，仍在左下；技能键环绕右下大蛛丝键
+
+体积 raw **752.4 KB** / brotli **175.7 KB**（compressed 版 250 KB 级）。
+
+## v57: coins doubled + pickup effects (content pass)
+
+- coins 1269 -> 2539: addCoinTrails() adds two companions per every other coin (0.85m to each side, 0.5/0.7m up), so a line reads as a trail
+- one draw call: coins moved from per-coin Mesh to a single InstancedMesh; only instances within 30m of the player are rewritten
+- pickup effect, all preallocated (zero allocation on pickup): 10 shockwave rings (additive, 0.38-0.68s to 3.6x), 4-5 sparks from the 260 particle pool, a screen-space +14 x3 label from a 12-node DOM pool, and pitch that climbs with the combo (1180 * 1.06^combo)
+- combo: pickups within 1.2s give x2..x5 and +2 score per step
+- probes: coins_total 2539, pickup_ring_visible true, pickup_scene_delta 0, float_labels 12, errors 0
+
+## v58: magnet, chain reward, rare coins
+
+- magnet: a coin inside 8.5m starts flying at the player (speed 16 + (R-d)*3.4) and shrinks to 0.35 scale; it is collected through the same collectCoin() path, so chain/score/effects stay identical
+- chain: 10 pickups within 1.5s each reset the chain; the 10th pays a forward dash (9 m/s impulse up), 2.6s invulnerability, a shake and a green burst
+- rare coins: every 37th coin (69 of 2539) is 1.65x bigger, purple, worth 60 points, with a purple shockwave, 10 sparks and a '+60 rare' label. They live in a second InstancedMesh because per-instance colour never compiled in the trimmed three build
+- probes: coins_total 2539, rare_coins 69, magnet_collects true (8 frames), chain_reward_fired true, chain_invuln_gain true, errors 0
+- debug flags kept for review: ?rare=1 parks a rare coin in view, ?fxdemo=1 loops the pickup effect
+
+## v62: district pips, magnet trail, richer clear card
+
+- district pips: 8 dots plus a 3/8 counter under the chain bar; filled for every cleared district (inline flex layout because page-wide CSS rules kept winning)
+- magnet trail: magnetTrail(c) drops a spark behind a pulled coin every 0.07s (rare coins trail purple), from the existing 260-particle pool, so still zero allocation
+- clear card: now reports time, kills, coins and districts left, hides itself after 3.2s; kills/coins are guarded so a district that falls before any kill shows 0 instead of NaN
+- probes: district_pips 8, district_pips_on 1, magnet_trail_sparks 1, card_has_time true, card_has_kills true, errors 0
+- debug flags: ?district=1 (card + three pips lit), ?chaindemo=1, ?rare=1, ?fxdemo=1
