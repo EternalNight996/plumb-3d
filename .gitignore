@@ -1,0 +1,5 @@
+node_modules/
+dist/three*.js
+*.log
+.DS_Store
+Thumbs.db

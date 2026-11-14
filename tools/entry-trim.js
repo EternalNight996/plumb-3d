@@ -1,0 +1,9 @@
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { Reflector } from 'three/addons/objects/Reflector.js';
+import { ACESFilmicToneMapping, AdditiveBlending, AmbientLight, BoxGeometry, BufferGeometry, CanvasTexture, CapsuleGeometry, Clock, ConeGeometry, CylinderGeometry, DirectionalLight, DoubleSide, DynamicDrawUsage, Euler, Fog, Group, HemisphereLight, IcosahedronGeometry, InstancedMesh, Line, LineBasicMaterial, Matrix4, Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, Object3D, OctahedronGeometry, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, PointLight, Quaternion, RepeatWrapping, RingGeometry, SRGBColorSpace, Scene, SphereGeometry, Sprite, SpriteMaterial, TetrahedronGeometry, TorusGeometry, Vector2, Vector3, WebGLRenderer } from 'three';
+window.THREE = { EffectComposer, RenderPass, UnrealBloomPass, SSAOPass, OutputPass, Reflector,
+  ACESFilmicToneMapping, AdditiveBlending, AmbientLight, BoxGeometry, BufferGeometry, CanvasTexture, CapsuleGeometry, Clock, ConeGeometry, CylinderGeometry, DirectionalLight, DoubleSide, DynamicDrawUsage, Euler, Fog, Group, HemisphereLight, IcosahedronGeometry, InstancedMesh, Line, LineBasicMaterial, Matrix4, Mesh, MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, Object3D, OctahedronGeometry, PCFSoftShadowMap, PerspectiveCamera, PlaneGeometry, PointLight, Quaternion, RepeatWrapping, RingGeometry, SRGBColorSpace, Scene, SphereGeometry, Sprite, SpriteMaterial, TetrahedronGeometry, TorusGeometry, Vector2, Vector3, WebGLRenderer };

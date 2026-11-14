@@ -1,0 +1,25 @@
+{
+  "name": "plumb-3d",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A 4.2 km skyline parkour game in a single index.html — zero assets, three.js inlined.",
+  "keywords": [
+    "game",
+    "three.js",
+    "html5",
+    "single-file",
+    "webgl",
+    "parkour",
+    "grappling-hook"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "build:packed": "node tools/build-packed.mjs",
+    "serve": "python -m http.server 8788"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "three": "^0.171.0"
+  }
+}
